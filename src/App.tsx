@@ -1,51 +1,75 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import Popover from "@mui/material/Popover";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import {
+  Button,
+  Container,
+  Typography,
+  Popover,
+  Grid,
+  Stack,
+  Box,
+} from "@mui/material";
 import GraphContainer from "./GraphContainer";
 import ColorPicker from "./ColorPicker";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  typography: {
+    fontFamily: ["NicoMoji"].join(","),
+  },
+});
 
 function App() {
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
-    null
-  );
+  const [backgroundColor, setBackgroundColor] = React.useState("#535353");
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
+  const handleSetBackgroundColor = (color: string) => {
+    setBackgroundColor(color);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
+  const [fontColor, setFontColor] = React.useState("#FFFFFF");
+
+  const handleSetFontColor = (color: string) => {
+    setFontColor(color);
   };
 
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
+  const [lineColor, setLineColor] = React.useState("#8884d8");
+
+  const handleSetLineColor = (color: string) => {
+    setLineColor(color);
+  };
 
   return (
     <div className="App">
-      <header className="Global Warming Is Real">
-        <GraphContainer />
+      <ThemeProvider theme={theme}>
+        <Container maxWidth="lg">
+          <Stack style={{ marginTop: 100, margin: 100 }}>
+            <GraphContainer
+              fontColor={fontColor}
+              backgroundColor={backgroundColor}
+              lineColor={lineColor}
+            />
 
-        <Button aria-describedby={id} variant="contained" onClick={handleClick}>
-          Open Popover
-        </Button>
-        <Popover
-          id={id}
-          open={open}
-          anchorEl={anchorEl}
-          onClose={handleClose}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
-          }}
-        >
-          <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
-        </Popover>
-
-        <ColorPicker />
-      </header>
+            <Stack marginTop={2} direction={"row"} spacing={6}>
+              <ColorPicker
+                handleSetColor={handleSetBackgroundColor}
+                color={backgroundColor}
+                title={"Background"}
+              />
+              <ColorPicker
+                handleSetColor={handleSetFontColor}
+                color={fontColor}
+                title={"Front"}
+              />
+              <ColorPicker
+                handleSetColor={handleSetLineColor}
+                color={lineColor}
+                title={"Line"}
+              />
+            </Stack>
+          </Stack>
+        </Container>
+      </ThemeProvider>
     </div>
   );
 }

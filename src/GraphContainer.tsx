@@ -1,59 +1,80 @@
 import React from "react";
 import Graph from "./Graph";
 
-function GraphContainer() {
+import { Grid, Box, Stack, Typography, Container } from "@mui/material";
+
+type GraphContainer = {
+  fontColor: string;
+  backgroundColor: string;
+  lineColor: string;
+};
+
+function GraphContainer(props: GraphContainer) {
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+
   return (
-    <div
+    <Stack
       style={{
-        border: "5px solid white",
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        padding: "10px",
-        borderRadius: "8px",
-        width: "75%",
-        height: "70%",
+        border: "4px solid white",
+        borderRadius: 8,
+        background: props.backgroundColor,
       }}
     >
-      <div
-        style={{
-          paddingTop: "30px",
-          fontFamily: "NicoMoji",
-          color: "white",
-          fontSize: "3.2vw",
-          margin: "auto",
-          width: "100%",
-          textAlign: "center",
-        }}
-      >
-        Global Warming Is Real
-        <div
+      <Stack style={{ margin: 50, height: "60vh" }}>
+        <Typography
+          style={{
+            fontFamily: "NicoMoji",
+            color: props.fontColor,
+            fontSize: "4vw",
+            margin: "auto",
+            width: "100%",
+            textAlign: "center",
+          }}
+        >
+          Stupidly Obvious.
+        </Typography>
+        <Typography
           style={{
             paddingTop: "30px",
             fontFamily: "NicoMoji",
-            color: "white",
-            fontSize: "1vw",
+            color: props.fontColor,
+            fontSize: "2vw",
             margin: "auto",
           }}
         >
-          Average Global Surface Tempurature Per Year
+          Our Planet is Heating up.
+        </Typography>
+        {/* <Container> */}
+        <div style={{ width: "100%", height: "100%" }}>
+          <Graph axisColor={props.fontColor} lineColor={props.lineColor} />
         </div>
-      </div>
-      <div
-        style={{
-          paddingTop: "30px",
-          fontFamily: "NicoMoji",
-          color: "white",
-          fontSize: "1vw",
-          margin: "auto",
-          width: "100%",
-          textAlign: "center",
-        }}
-      ></div>
-
-      <Graph />
-    </div>
+        <Typography
+          style={{
+            paddingTop: "30px",
+            fontFamily: "NicoMoji",
+            color: props.fontColor,
+            fontSize: "12px",
+            margin: "auto",
+          }}
+        >
+          Average Global Surface Temperature Per Year
+        </Typography>
+        {/* </Container> */}
+      </Stack>
+    </Stack>
   );
 }
 
