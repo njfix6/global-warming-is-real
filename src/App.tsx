@@ -13,12 +13,29 @@ import {
 import GraphContainer from "./GraphContainer";
 import ColorPicker from "./ColorPicker";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Download } from "react-feather";
+import styled from "styled-components";
 
 const theme = createTheme({
   typography: {
     fontFamily: ["NicoMoji"].join(","),
   },
+  palette: {
+    primary: {
+      light: "#ffffff",
+      main: "#ffffff",
+      dark: "#002884",
+    },
+  },
 });
+
+const PushRightDiv = styled.div`
+  flex-grow: 1;
+`;
+
+const PushRight = () => {
+  return <PushRightDiv />;
+};
 
 function App() {
   const [backgroundColor, setBackgroundColor] = React.useState("#535353");
@@ -66,6 +83,11 @@ function App() {
                 color={lineColor}
                 title={"Line"}
               />
+              <PushRight />
+              <Button style={{ border: "4px solid" }} variant="outlined">
+                <Box style={{ marginRight: 8 }}>Download</Box>
+                <Download />
+              </Button>
             </Stack>
           </Stack>
         </Container>
