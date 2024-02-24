@@ -70,7 +70,15 @@ function GraphContainer(props: GraphContainer) {
             margin: "auto",
           }}
         >
-          Average Global Surface Temperature Per Year
+          Average Global Surface Temperature Per Year{" ("}
+          <a
+            style={{ color: "white" }}
+            target="_blank"
+            href={"https://climate.nasa.gov/vital-signs/global-temperature/"}
+          >
+            source
+          </a>
+          )
         </Typography>
         {/* </Container> */}
       </Stack>
