@@ -8,6 +8,8 @@ import {
   Tooltip,
   Label,
   Legend,
+  AreaChart,
+  Area,
   ResponsiveContainer,
 } from "recharts";
 
@@ -24,7 +26,7 @@ export default class Graph extends PureComponent<Props> {
   render() {
     return (
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart
+        <AreaChart
           width={500}
           height={300}
           data={data}
@@ -47,15 +49,16 @@ export default class Graph extends PureComponent<Props> {
 
           {/* <Tooltip /> */}
           {/* <Legend /> */}
-          <Line
+          <Area
             strokeWidth={5}
             type="monotone"
             dot={false}
             dataKey="temp"
+            fill={this.props.lineColor}
             stroke={this.props.lineColor}
           />
           {/* <Line type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
-        </LineChart>
+        </AreaChart>
       </ResponsiveContainer>
     );
   }
