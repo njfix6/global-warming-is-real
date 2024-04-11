@@ -1,4 +1,5 @@
 import React from "react";
+import { toPng } from "retina-dom-to-image";
 import logo from "./logo.svg";
 import "./App.css";
 import {
@@ -39,6 +40,7 @@ const PushRight = () => {
 
 function App() {
   const [backgroundColor, setBackgroundColor] = React.useState("#535353");
+  const ref = React.useRef(null);
 
   const handleSetBackgroundColor = (color: string) => {
     setBackgroundColor(color);
@@ -61,11 +63,13 @@ function App() {
       <ThemeProvider theme={theme}>
         <Container maxWidth="lg">
           <Stack style={{ marginTop: 100, margin: 100 }}>
-            <GraphContainer
-              fontColor={fontColor}
-              backgroundColor={backgroundColor}
-              lineColor={lineColor}
-            />
+            <div ref={ref}>
+              <GraphContainer
+                fontColor={fontColor}
+                backgroundColor={backgroundColor}
+                lineColor={lineColor}
+              />
+            </div>
 
             <Stack marginTop={2} direction={"row"} spacing={6}>
               <ColorPicker
@@ -84,7 +88,20 @@ function App() {
                 title={"Line"}
               />
               <PushRight />
-              <Button style={{ border: "4px solid" }} variant="outlined">
+              <Button
+                style={{ border: "4px solid" }}
+                variant="outlined"
+                onClick={async () => {
+                  const dataurl = await toPng(ref.current);
+                  const link = document.createElement("a");
+
+                  link.download = "export.png";
+                  link.href = dataurl;
+                  document.body.appendChild(link);
+                  link.click();
+                  link.remove();
+                }}
+              >
                 <Box style={{ marginRight: 8 }}>Download</Box>
                 <Download />
               </Button>

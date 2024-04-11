@@ -3,29 +3,29 @@
   "window.zoomLevel": 1,
   "editor.formatOnSave": true,
   "[typescript]": {
-      "editor.formatOnPaste": false,
-      "editor.formatOnSave": true,
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": true
   },
   "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
   "[typescriptreact]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "eslint.alwaysShowStatus": true,
   "eslint.format.enable": true,
   "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true
-    },
+    "source.fixAll.eslint": "explicit"
+  },
   "eslint.codeAction.showDocumentation": {
-      "enable": true
+    "enable": true
   },
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
   "files.exclude": {
-      "**/.DS_Store": true,
-      "**/node_modules": true, 
-      "node_modules": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    "node_modules": true
   }
 }
